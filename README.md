@@ -1,5 +1,6 @@
 # Fun playground for ML, AI, DL etc
 
+![mdn](https://github.com/jakorostami/ml_playground/blob/master/mdn.png?raw=true)
 
 ## Call it whatever you want. Focus areas
 * PyTorch
