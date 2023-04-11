@@ -1,6 +1,7 @@
 # Fun playground for ML, AI, DL etc
 
 ![mdn](https://github.com/jakorostami/ml_playground/blob/master/mdn.png?raw=true)
+Image source: "<i>Deep mixture density networks for acoustic modeling in statistical parametric speech synthesis </i>", H. Zen, A. Senior (2014)
 
 ## Call it whatever you want. Focus areas
 * PyTorch
