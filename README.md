@@ -16,7 +16,7 @@ Image source: "<i>Deep mixture density networks for acoustic modeling in statist
 * Bayesian Networks, Decision Networks, Credal Networks (<i>maybe</i>)
 * Gaussian Process, Mixture Models
 * Bayesian Personalized Ranking
-* Mixed Density Network
+* Mixture Density Network
 * Hierarchical Bayes
 
 ## Statistical Machine Learning
