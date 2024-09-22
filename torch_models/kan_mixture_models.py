@@ -121,3 +121,35 @@ class FourierKANMixtureDensityNetwork(nn.Module):
         pi, mu, sigma = F.softmax(self.pi(hidden), 1), self.mu(hidden), torch.exp(self.sigma(hidden))
 
         return pi, mu, sigma
+
+
+
+class MixtureDensityNetwork(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim, n_mixtures, n_hidden_layers=2):
+        super().__init__()
+
+        layers = [nn.Linear(input_dim, hidden_dim), nn.ReLU()]
+        for _ in range(n_hidden_layers - 1):
+            layers.extend([nn.Linear(hidden_dim, hidden_dim), nn.ReLU()])
+        self.hidden_block = nn.Sequential(*layers)
+
+        # Output layers
+        self.pi = nn.Linear(hidden_dim, n_mixtures)
+        self.mu = nn.Linear(hidden_dim, n_mixtures * output_dim)
+        self.sigma = nn.Linear(hidden_dim, n_mixtures * output_dim)
+        
+        self.n_mixtures = n_mixtures
+        self.output_dim = output_dim
+
+    def forward(self, x):
+        hidden = self.hidden_block(x)
+        
+        pi = F.softmax(self.pi(hidden), dim=1)
+        mu = self.mu(hidden)
+        sigma = torch.exp(self.sigma(hidden))
+        
+        if self.output_dim > 1:
+            mu = mu.view(-1, self.n_mixtures, self.output_dim)
+            sigma = sigma.view(-1, self.n_mixtures, self.output_dim)
+        
+        return pi, mu, sigma
